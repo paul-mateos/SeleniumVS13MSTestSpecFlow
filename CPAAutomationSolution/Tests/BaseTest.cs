@@ -7,19 +7,22 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support;
 using CPAAutomationSolution.Environment;
 using System.Diagnostics;
+using TechTalk.SpecFlow;
+
 
 
 namespace CPAAutomationSolution
 {
     [TestClass]
-    public class BaseTest
+    public abstract class BaseTest
     {
         protected static IWebDriver driver;
         protected TestEnvironment environment;
         //private const string DRIVER_PATH = @"ThirdParty";
-        
+
+        [BeforeScenario]
         [TestInitialize]
-        public static void Initialize()
+        public void Initialize()
         {
             var options = new InternetExplorerOptions()
             {
@@ -46,9 +49,9 @@ namespace CPAAutomationSolution
 
         }
 
-
+        [AfterScenario]
         [TestCleanup]
-        public static void TestCleanUp()
+        public void TestCleanUp()
         {
             driver.Quit();
             switch (Properties.Settings.Default.Browser)

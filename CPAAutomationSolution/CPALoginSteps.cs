@@ -8,25 +8,10 @@ using TechTalk.SpecFlow;
 namespace CPAAutomationSolution
 {
     [Binding]
-    public class CPALoginSteps : BaseTest
+    public class CPALoginSteps: BaseTest
     {
 
-        [BeforeScenario]
-        public void BeforeScenario()
-        {
-
-            BaseTest.Initialize();
-            
-        }
-
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            BaseTest.TestCleanUp();
-            
-        } 
-
-
+  
         [Given(@"I have clicked the login button")]
         public void GivenIHaveClickedTheLoginButton()
         {
@@ -67,5 +52,17 @@ namespace CPAAutomationSolution
             Assert.IsTrue(driver.Title == "CPA Australia - Home");
             homePage.ClickLogOutButton();
         }
+
+        [Given(@"I have entered the (.*) and (.*)")]
+        public void GivenIHaveEnteredTheAnd(string p0, string p1, Table table)
+        {
+            string customerID = ((string[])(table.Rows[0].Values))[0].ToString();
+            string password = ((string[])(table.Rows[0].Values))[1].ToString();
+            LoginPage loginPage = new LoginPage(driver);
+            Assert.IsTrue(driver.Title == "CPA Australia - Sign in or create an account");
+            loginPage.SetCustomerID(customerID);
+            loginPage.SetPassword(password);
+        }
+
     }
 }

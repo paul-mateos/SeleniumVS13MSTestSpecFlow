@@ -15,6 +15,7 @@ namespace CPAAutomationSolution.Utilities
 
             WebDriverWait wait = new WebDriverWait(d, TimeSpan.FromSeconds(Properties.Settings.Default.WaitTime));
             IWebElement elem = wait.Until(ExpectedConditions.ElementIsVisible(searchType));
+            elementHighlight(elem, d);
             return elem;
             
         }
@@ -28,8 +29,16 @@ namespace CPAAutomationSolution.Utilities
         public static void SetValue(By searchType, string value, IWebDriver d)
         {
             IWebElement elem = GetElement(searchType, d);
+            elem.Clear();
             elem.SendKeys(value);
 
+        }
+
+        public static void elementHighlight(IWebElement element, IWebDriver d)
+        {
+            var jsDriver = (IJavaScriptExecutor)d;
+            string highlightJavascript = @"$(arguments[0]).css({ ""border-width"" : ""2px"", ""border-style"" : ""solid"", ""border-color"" : ""red"" });";
+            jsDriver.ExecuteScript(highlightJavascript, new object[] { element });
         }
 
     }

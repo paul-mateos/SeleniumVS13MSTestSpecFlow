@@ -7,44 +7,26 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support;
 using OpenQA.Selenium.Support.UI;
 using CPAAutomationSolution.Pages;
+using CPAAutomationSolution.Tests;
 
 namespace CPAAutomationSolution.Tests
 {
-    /// <summary>
-    /// Summary description for GoogleSearch
-    /// </summary>
+
     [TestClass]
     public class CPALoginTest : BaseTest
     {
         public CPALoginTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+
         }
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
-        [TestMethod]
+       
+        [TestCategory("PVT"), TestCategory("Regression")]
+        [TestMethod] 
         public void SuccessfulLogin()
         {
-             //Log on to site as user.
+
+            //Log on to site as user.
             Assert.IsTrue(driver.Title == "CPA Australia - Home");
             HomePage homePage = new HomePage(driver);            
             homePage.ClickLoginButton();
@@ -55,9 +37,10 @@ namespace CPAAutomationSolution.Tests
             loginPage.ClickSubmitButton();
             Assert.IsTrue(driver.Title == "CPA Australia - Home");
             homePage.ClickLogOutButton();
-            
+
         }
 
+        [TestCategory("Regression")]
         [TestMethod]
         public void FailedLogin()
         {
@@ -68,8 +51,8 @@ namespace CPAAutomationSolution.Tests
             homePage.ClickLoginButton();
             Assert.IsTrue(driver.Title == "CPA Australia - Sign in or create an account");
             LoginPage loginPage = new LoginPage(driver);
-            loginPage.SetCustomerID("1234");
-            loginPage.SetPassword("abcd");
+            loginPage.SetCustomerID("982209");
+            loginPage.SetPassword("01Password");
             loginPage.ClickSubmitButton();
             Assert.IsTrue(driver.Title == "CPA Australia - Home");
 
