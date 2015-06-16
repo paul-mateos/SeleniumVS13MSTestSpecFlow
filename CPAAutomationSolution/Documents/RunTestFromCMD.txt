@@ -1,0 +1,15 @@
+///*************Running Build Definitions from Command line*************//
+TFSBuild start http://meltfsp001:8080 DefaultCollection CIAutomation_TestLabBuild
+
+///*************Running MTM suite from Command line*************//
+C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64>tcm run /create /title:"Commandline Test Run" 
+/planid:164 /suiteid:165 /configid:3 /settingsname:"Automation Test Settings" /testenvironment:"vrtdev001" 
+/collection:http://meltfsp001:8080/tfs/DefaultCollection /teamproject:TestAutomation
+
+
+///*************Running MSTest from Command line using MSTest.exe*************//
+MSTest /DefaultCollection: \\VRTDEV001\MSTestBuilds\CPAAutomation_TestProjectBuild\CPAAutomation_TestProjectBuild_2015mmdd.n\CPAAutomationSolution.dll /category:"Regression"
+
+///*************Running MSTest from Command line using MSTest.exe*************//
+
+
